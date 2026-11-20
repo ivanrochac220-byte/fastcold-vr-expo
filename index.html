@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FastCold VR · Catálogo de máquinas</title>
+    <script type="module" crossorigin src="./assets/index-BB4hk4qY.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-C7FmKr8a.css">
+  </head>
+  <body>
+    <main class="visor">
+      <section class="escena" aria-label="Máquina en 3D">
+        <canvas id="lienzo" data-prueba="lienzo"></canvas>
+
+        <header class="marca">
+          <img src="./assets/logo-fastcold-BgXULEeJ.png" alt="FastCold" width="155" height="47" />
+          <div>
+            <h1 id="maquina-codigo" data-prueba="maquina-codigo"></h1>
+            <p id="maquina-nombre"></p>
+            <p id="maquina-produccion" class="dato-fuerte"></p>
+            <div id="maquinas" class="maquinas" data-prueba="maquinas" role="group" aria-label="Elegir máquina"></div>
+          </div>
+        </header>
+
+        <p class="aviso-modelo" id="aviso-modelo" data-prueba="aviso-modelo" hidden>Modelo 3D en preparación</p>
+
+        <p class="ayuda" id="ayuda">Arrastra para girar · rueda para acercar · toca una pieza para traerla</p>
+        <div class="acciones-visor">
+          <button type="button" id="boton-ra" class="boton-ra" data-prueba="boton-ra" hidden>Ver en realidad aumentada</button>
+          <button type="button" id="boton-tutorial" class="boton-tutorial" data-prueba="boton-tutorial" hidden>Tutorial</button>
+          <div class="acciones-dibujos">
+            <button type="button" id="boton-diagrama" class="boton-tutorial boton-diagrama" data-prueba="boton-diagrama" aria-controls="diagrama" aria-expanded="false">Diagrama de la máquina</button>
+            <button type="button" id="boton-corte" class="boton-tutorial boton-diagrama boton-corte" data-prueba="boton-corte" aria-controls="corte" aria-expanded="false">Corte de la máquina</button>
+          </div>
+          <div class="acciones-persona">
+            <button type="button" id="boton-persona" class="boton-tutorial boton-persona" data-prueba="boton-persona" aria-pressed="true">Persona de referencia</button>
+            <button id="boton-planta" type="button" class="boton-tutorial boton-persona" data-prueba="boton-planta" aria-pressed="false">Ver la planta</button>
+          </div>
+          <div id="tamano" class="tamano" data-prueba="tamano" role="group" aria-labelledby="titulo-tamano">
+            <span id="titulo-tamano">Tamaño en el visor</span>
+            <button type="button" data-tamano="real" aria-pressed="true">Real</button>
+            <button type="button" data-tamano="maqueta" aria-pressed="false">Maqueta</button>
+          </div>
+          <section class="tutorial" id="tutorial" data-prueba="tutorial" aria-live="polite" aria-label="Tutorial" hidden>
+            <p class="tutorial-paso" id="tutorial-paso"></p>
+            <div class="tutorial-puntos" id="tutorial-puntos" aria-hidden="true"></div>
+            <p class="tutorial-texto" id="tutorial-texto"></p>
+            <button type="button" id="tutorial-saltar" data-prueba="tutorial-saltar">Saltar</button>
+          </section>
+        </div>
+
+        <div class="desarme" data-prueba="control-desarme">
+          <button type="button" id="boton-desarmar" data-prueba="boton-desarmar">Desarmar</button>
+          <button type="button" id="boton-marcha" class="secundario" data-prueba="boton-marcha" aria-pressed="false">Poner en marcha</button>
+          <button type="button" id="boton-hielo" class="secundario" data-prueba="boton-hielo" hidden>Ver la salida de hielo</button>
+          <label class="deslizador">
+            <span>Armada</span>
+            <input type="range" id="desarme" data-prueba="desarme" min="0" max="100" value="0" step="1" aria-label="Qué tan desarmada se ve la máquina" />
+            <span>Desarmada</span>
+          </label>
+        </div>
+
+        <section id="diagrama" class="diagrama" data-prueba="diagrama" role="dialog" aria-labelledby="diagrama-titulo" hidden>
+          <header class="diagrama-cabeza">
+            <h2 id="diagrama-titulo" data-prueba="diagrama-titulo"></h2>
+            <button type="button" id="diagrama-cerrar" data-prueba="diagrama-cerrar">Cerrar</button>
+          </header>
+          <canvas id="diagrama-lienzo" class="diagrama-lienzo" data-prueba="diagrama-lienzo" role="img"></canvas>
+          <div class="diagrama-lado">
+            <ul id="diagrama-leyenda" class="leyenda" data-prueba="diagrama-leyenda" aria-label="Qué significa cada color"></ul>
+            <p id="diagrama-pie" class="diagrama-pie" data-prueba="diagrama-pie"></p>
+          </div>
+        </section>
+
+        <section id="corte" class="diagrama corte" data-prueba="corte" role="dialog" aria-labelledby="corte-titulo" hidden>
+          <header class="diagrama-cabeza">
+            <h2 id="corte-titulo" data-prueba="corte-titulo"></h2>
+            <button type="button" id="corte-cerrar" data-prueba="corte-cerrar">Cerrar</button>
+          </header>
+          <canvas id="corte-lienzo" class="diagrama-lienzo corte-lienzo" data-prueba="corte-lienzo" role="img"></canvas>
+          <div class="diagrama-lado">
+            <p id="corte-pie" class="diagrama-pie" data-prueba="corte-pie"></p>
+          </div>
+          <ul id="corte-leyenda" class="leyenda leyenda-corte" data-prueba="corte-leyenda" aria-label="Qué significa cada color"></ul>
+          <div id="corte-detalle" class="corte-detalle" data-prueba="corte-detalle" aria-live="polite"></div>
+        </section>
+
+        <p class="rotulo-persona" id="rotulo-persona" data-prueba="rotulo-persona" aria-hidden="true" hidden></p>
+        <p class="letrero" data-prueba="letrero">Representación hecha desde la ficha. No es plano de fábrica.</p>
+      </section>
+
+      <aside class="panel">
+        <section id="planta-info" class="tarjeta planta-info" data-prueba="planta-info" aria-labelledby="planta-titulo" hidden>
+          <h2 id="planta-titulo"></h2>
+          <ol id="planta-pasos"></ol>
+          <div id="visita" class="visita" data-prueba="visita" hidden>
+            <p id="visita-paso" class="visita-paso"></p>
+            <h3 id="visita-nombre" class="visita-nombre"></h3>
+            <p id="visita-texto" class="visita-texto"></p>
+            <div class="acciones-persona">
+              <button id="boton-anterior" type="button" class="boton-tutorial boton-persona" data-prueba="boton-anterior">Anterior</button>
+              <button id="boton-siguiente" type="button" class="boton-tutorial boton-persona" data-prueba="boton-siguiente">Siguiente</button>
+              <button id="boton-todas" type="button" class="boton-tutorial boton-persona" data-prueba="boton-todas" aria-pressed="false">Ver todas las máquinas</button>
+            </div>
+            <p id="menu-de-paradas-titulo" class="visita-paso"></p>
+            <ol id="menu-de-paradas" class="menu-de-paradas" data-prueba="menu-de-paradas"></ol>
+            <div id="explicacion-de-la-parada" data-prueba="explicacion-de-la-parada"></div>
+          </div>
+          <button id="boton-visita" type="button" class="boton-tutorial boton-persona" data-prueba="boton-visita" aria-pressed="false">Entrar a la planta</button>
+          <p id="planta-pie" class="planta-pie"></p>
+        </section>
+
+        <section id="tarjeta" class="tarjeta" data-prueba="tarjeta" aria-live="polite">
+          <p class="apagado">Toca una pieza para traerla a la mano.</p>
+        </section>
+
+        <section class="piezas" aria-labelledby="titulo-piezas">
+          <h2 id="titulo-piezas">Piezas</h2>
+          <ul id="lista-piezas" class="lista" data-prueba="lista-piezas"></ul>
+        </section>
+      </aside>
+    </main>
+  </body>
+</html>
